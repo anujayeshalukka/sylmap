@@ -99,15 +99,15 @@ export default function HeroSearch() {
             onClick={() => setActiveTab("search")}
             title="Search & Explore"
             aria-label="Search & Explore"
-            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl rounded-b-md transition-all duration-200 text-left ${
+            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${
               activeTab === "search"
-                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-x border-teal-500/50 text-white shadow-[0_-5px_15px_rgba(20,184,166,0.15)]"
-                : "shrink-0 w-11 h-[48px] justify-center bg-[#070e1e]/60 border border-white/10 text-slate-400 hover:text-slate-200"
+                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
+                : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
             }`}
           >
             <Search
               className={`w-4 h-4 shrink-0 transition-colors ${
-                activeTab === "search" ? "text-cyan-400" : "text-slate-400"
+                activeTab === "search" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
               }`}
             />
             {activeTab === "search" && (
@@ -115,7 +115,7 @@ export default function HeroSearch() {
                 <span className="text-xs font-bold text-white tracking-tight leading-tight truncate">
                   Search &amp; Explore
                 </span>
-                <span className="text-[10px] text-slate-300/80 font-normal leading-tight truncate mt-0.5">
+                <span className="text-[10px] text-cyan-100/70 font-normal leading-tight truncate mt-0.5">
                   Universities · Programmes
                 </span>
               </div>
@@ -128,15 +128,15 @@ export default function HeroSearch() {
             onClick={() => setActiveTab("compare")}
             title="Compare"
             aria-label="Compare"
-            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl rounded-b-md transition-all duration-200 text-left ${
+            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${
               activeTab === "compare"
-                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-x border-teal-500/50 text-white shadow-[0_-5px_15px_rgba(20,184,166,0.15)]"
-                : "shrink-0 w-11 h-[48px] justify-center bg-[#070e1e]/60 border border-white/10 text-slate-400 hover:text-slate-200"
+                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
+                : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
             }`}
           >
             <GitCompare
               className={`w-4 h-4 shrink-0 transition-colors ${
-                activeTab === "compare" ? "text-cyan-400" : "text-slate-400"
+                activeTab === "compare" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
               }`}
             />
             {activeTab === "compare" && (
@@ -144,7 +144,7 @@ export default function HeroSearch() {
                 <span className="text-xs font-bold text-white tracking-tight leading-tight truncate">
                   Compare
                 </span>
-                <span className="text-[10px] text-slate-300/80 font-normal leading-tight truncate mt-0.5">
+                <span className="text-[10px] text-cyan-100/70 font-normal leading-tight truncate mt-0.5">
                   Institutions &amp; Curricula
                 </span>
               </div>
@@ -157,15 +157,15 @@ export default function HeroSearch() {
             onClick={() => setActiveTab("ask")}
             title="Ask Sylmap"
             aria-label="Ask Sylmap"
-            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl rounded-b-md transition-all duration-200 text-left ${
+            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${
               activeTab === "ask"
-                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-x border-teal-500/50 text-white shadow-[0_-5px_15px_rgba(20,184,166,0.15)]"
-                : "shrink-0 w-11 h-[48px] justify-center bg-[#070e1e]/60 border border-white/10 text-slate-400 hover:text-slate-200"
+                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
+                : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
             }`}
           >
             <Sparkles
               className={`w-4 h-4 shrink-0 transition-colors ${
-                activeTab === "ask" ? "text-cyan-400" : "text-cyan-300/60"
+                activeTab === "ask" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
               }`}
             />
             {activeTab === "ask" && (
@@ -173,7 +173,7 @@ export default function HeroSearch() {
                 <span className="text-xs font-bold text-white tracking-tight leading-tight truncate">
                   Ask Sylmap
                 </span>
-                <span className="text-[10px] text-slate-300/80 font-normal leading-tight truncate mt-0.5">
+                <span className="text-[10px] text-cyan-100/70 font-normal leading-tight truncate mt-0.5">
                   Ask questions
                 </span>
               </div>
@@ -187,19 +187,19 @@ export default function HeroSearch() {
           <button
             type="button"
             onClick={() => setActiveTab("search")}
-            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl rounded-b-lg transition-all duration-300 text-left ${
+            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${
               activeTab === "search"
-                ? "bg-[#062c30]/95 border-t border-x border-teal-500/50 text-white shadow-[0_-5px_20px_rgba(20,184,166,0.15)]"
-                : "bg-[#070e1e]/60 border border-white/10 hover:border-white/20 text-slate-400 hover:text-slate-200"
+                ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
+                : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
             }`}
           >
             <Search
               className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                activeTab === "search" ? "text-cyan-400" : "text-slate-400"
+                activeTab === "search" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
               }`}
             />
             <div className="flex flex-col min-w-0">
-              <span className="text-xs sm:text-sm font-bold text-white tracking-tight leading-tight truncate">
+              <span className="text-xs sm:text-sm font-bold tracking-tight leading-tight truncate">
                 Search &amp; Explore
               </span>
               <span className="text-[10px] sm:text-xs text-slate-300/80 font-normal leading-tight truncate mt-0.5">
@@ -212,19 +212,19 @@ export default function HeroSearch() {
           <button
             type="button"
             onClick={() => setActiveTab("compare")}
-            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl rounded-b-lg transition-all duration-300 text-left ${
+            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${
               activeTab === "compare"
-                ? "bg-[#062c30]/95 border-t border-x border-teal-500/50 text-white shadow-[0_-5px_20px_rgba(20,184,166,0.15)]"
-                : "bg-[#070e1e]/60 border border-white/10 hover:border-white/20 text-slate-400 hover:text-slate-200"
+                ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
+                : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
             }`}
           >
             <GitCompare
               className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                activeTab === "compare" ? "text-cyan-400" : "text-slate-400"
+                activeTab === "compare" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
               }`}
             />
             <div className="flex flex-col min-w-0">
-              <span className="text-xs sm:text-sm font-bold text-white tracking-tight leading-tight truncate">
+              <span className="text-xs sm:text-sm font-bold tracking-tight leading-tight truncate">
                 Compare
               </span>
               <span className="text-[10px] sm:text-xs text-slate-300/80 font-normal leading-tight truncate mt-0.5">
@@ -237,19 +237,19 @@ export default function HeroSearch() {
           <button
             type="button"
             onClick={() => setActiveTab("ask")}
-            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl rounded-b-lg transition-all duration-300 text-left ${
+            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${
               activeTab === "ask"
-                ? "bg-[#062c30]/95 border-t border-x border-teal-500/50 text-white shadow-[0_-5px_20px_rgba(20,184,166,0.15)]"
-                : "bg-[#070e1e]/60 border border-white/10 hover:border-white/20 text-slate-400 hover:text-slate-200"
+                ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
+                : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
             }`}
           >
             <Sparkles
               className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                activeTab === "ask" ? "text-cyan-400" : "text-cyan-300/60"
+                activeTab === "ask" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
               }`}
             />
             <div className="flex flex-col min-w-0">
-              <span className="text-xs sm:text-sm font-bold text-white tracking-tight leading-tight truncate">
+              <span className="text-xs sm:text-sm font-bold tracking-tight leading-tight truncate">
                 Ask Sylmap
               </span>
               <span className="text-[10px] sm:text-xs text-slate-300/80 font-normal leading-tight truncate mt-0.5">
@@ -260,7 +260,7 @@ export default function HeroSearch() {
         </div>
 
         {/* Unified Glassmorphism Active Content Panel */}
-        <div className="w-full rounded-b-2xl rounded-t-lg bg-[#040b19]/90 border border-teal-500/40 backdrop-blur-md p-3.5 sm:p-4 shadow-[0_0_25px_rgba(0,242,254,0.12)] flex flex-col justify-center min-h-[112px] sm:min-h-[120px] transition-all duration-300 -mt-0.5">
+        <div className="w-full rounded-b-2xl rounded-t-none bg-[#040b19]/92 border border-cyan-500/45 backdrop-blur-md p-3.5 sm:p-4 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_24px_rgba(0,242,254,0.12)] flex flex-col justify-center min-h-[112px] sm:min-h-[120px] transition-all duration-300 -mt-0.5">
           {/* MODE 1: SEARCH & EXPLORE */}
           {activeTab === "search" && (
             <form onSubmit={handleSearchSubmit} className="relative w-full group">
