@@ -20,7 +20,7 @@ export default function MobileNav({ isOpen, onClose, links, user = null }: Mobil
       <div className="flex items-center justify-between pb-6 border-b border-white/10">
         <div className="flex items-center">
           <Image
-            src="/sylmaplogo.webp"
+            src="/sylmap.webp"
             alt="Sylmap"
             width={240}
             height={72}

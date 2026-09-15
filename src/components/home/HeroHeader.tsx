@@ -29,7 +29,7 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
       <div className="flex items-center">
         <Link href="/" className="inline-flex items-center transition-opacity hover:opacity-90">
           <Image
-            src="/sylmaplogo.webp"
+            src="/sylmap.webp"
             alt="Sylmap"
             width={320}
             height={96}
