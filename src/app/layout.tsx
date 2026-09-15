@@ -10,8 +10,37 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sylmap — Navigate the Academic Universe",
-  description: "Discover universities, explore programmes, compare curricula, access resources, and plan your academic future — all in one intelligent platform.",
+  metadataBase: new URL("https://sylmap.com"),
+  title: "Sylmap — Every Course. Every Curriculum. OneMap.",
+  description:
+    "Discover universities, programmes, curricula, learning resources and career pathways with Sylmap.",
+  icons: {
+    icon: "/fav.png",
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "Sylmap — Every Course. Every Curriculum. OneMap.",
+    description:
+      "Discover universities, programmes, curricula, learning resources and career pathways with Sylmap.",
+    url: "https://sylmap.com",
+    siteName: "Sylmap",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sylmap — Every Course. Every Curriculum. OneMap.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sylmap — Every Course. Every Curriculum. OneMap.",
+    description:
+      "Discover universities, programmes, curricula, learning resources and career pathways with Sylmap.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
