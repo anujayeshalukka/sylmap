@@ -99,16 +99,14 @@ export default function HeroSearch() {
             onClick={() => setActiveTab("search")}
             title="Search & Explore"
             aria-label="Search & Explore"
-            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${
-              activeTab === "search"
-                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
-                : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
-            }`}
+            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${activeTab === "search"
+              ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
+              : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
+              }`}
           >
             <Search
-              className={`w-4 h-4 shrink-0 transition-colors ${
-                activeTab === "search" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
-              }`}
+              className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "search" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
+                }`}
             />
             {activeTab === "search" && (
               <div className="flex flex-col min-w-0 animate-in fade-in duration-200">
@@ -128,16 +126,14 @@ export default function HeroSearch() {
             onClick={() => setActiveTab("compare")}
             title="Compare"
             aria-label="Compare"
-            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${
-              activeTab === "compare"
-                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
-                : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
-            }`}
+            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${activeTab === "compare"
+              ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
+              : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
+              }`}
           >
             <GitCompare
-              className={`w-4 h-4 shrink-0 transition-colors ${
-                activeTab === "compare" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
-              }`}
+              className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "compare" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
+                }`}
             />
             {activeTab === "compare" && (
               <div className="flex flex-col min-w-0 animate-in fade-in duration-200">
@@ -157,16 +153,14 @@ export default function HeroSearch() {
             onClick={() => setActiveTab("ask")}
             title="Ask Sylmap"
             aria-label="Ask Sylmap"
-            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${
-              activeTab === "ask"
-                ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
-                : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
-            }`}
+            className={`flex items-center gap-2 py-2 px-2.5 rounded-t-xl transition-all duration-200 text-left ${activeTab === "ask"
+              ? "flex-1 min-w-0 bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-4px_16px_rgba(0,242,254,0.15)]"
+              : "shrink-0 w-11 h-[48px] justify-center bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent text-slate-100 hover:bg-[#092254]/85 hover:text-white"
+              }`}
           >
             <Sparkles
-              className={`w-4 h-4 shrink-0 transition-colors ${
-                activeTab === "ask" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
-              }`}
+              className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "ask" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
+                }`}
             />
             {activeTab === "ask" && (
               <div className="flex flex-col min-w-0 animate-in fade-in duration-200">
@@ -187,16 +181,14 @@ export default function HeroSearch() {
           <button
             type="button"
             onClick={() => setActiveTab("search")}
-            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${
-              activeTab === "search"
-                ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
-                : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
-            }`}
+            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${activeTab === "search"
+              ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
+              : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
+              }`}
           >
             <Search
-              className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                activeTab === "search" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
-              }`}
+              className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${activeTab === "search" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
+                }`}
             />
             <div className="flex flex-col min-w-0">
               <span className="text-xs sm:text-sm font-bold tracking-tight leading-tight truncate">
@@ -212,16 +204,14 @@ export default function HeroSearch() {
           <button
             type="button"
             onClick={() => setActiveTab("compare")}
-            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${
-              activeTab === "compare"
-                ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
-                : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
-            }`}
+            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${activeTab === "compare"
+              ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
+              : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
+              }`}
           >
             <GitCompare
-              className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                activeTab === "compare" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
-              }`}
+              className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${activeTab === "compare" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
+                }`}
             />
             <div className="flex flex-col min-w-0">
               <span className="text-xs sm:text-sm font-bold tracking-tight leading-tight truncate">
@@ -237,16 +227,14 @@ export default function HeroSearch() {
           <button
             type="button"
             onClick={() => setActiveTab("ask")}
-            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${
-              activeTab === "ask"
-                ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
-                : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
-            }`}
+            className={`flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-2xl transition-all duration-300 text-left ${activeTab === "ask"
+              ? "bg-[#062c30]/95 border-t border-l border-r border-cyan-400/50 border-b-transparent text-white shadow-[0_-5px_20px_rgba(0,242,254,0.15)]"
+              : "bg-[#071a42]/75 border-t border-l border-r border-white/20 border-b-transparent hover:border-white/30 text-slate-100 hover:bg-[#092254]/85 hover:text-white"
+              }`}
           >
             <Sparkles
-              className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${
-                activeTab === "ask" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
-              }`}
+              className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-colors ${activeTab === "ask" ? "text-cyan-300 drop-shadow-[0_0_8px_rgba(0,242,254,0.5)]" : "text-slate-100"
+                }`}
             />
             <div className="flex flex-col min-w-0">
               <span className="text-xs sm:text-sm font-bold tracking-tight leading-tight truncate">
@@ -264,7 +252,7 @@ export default function HeroSearch() {
           {/* MODE 1: SEARCH & EXPLORE */}
           {activeTab === "search" && (
             <form onSubmit={handleSearchSubmit} className="relative w-full group">
-              <div className="relative flex items-center w-full rounded-xl bg-slate-950/70 border border-white/10 px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-300 focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(0,242,254,0.2)]">
+              <div className="relative flex items-center w-full rounded-xl bg-slate-950/70 border border-white/20 px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-300 focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(0,242,254,0.2)]">
                 <div className="pr-3.5 text-slate-400 group-focus-within:text-cyan-300 transition-colors">
                   <Search className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
                 </div>
@@ -303,11 +291,10 @@ export default function HeroSearch() {
                       key={opt}
                       type="button"
                       onClick={() => setCompareCategory(opt)}
-                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                        compareCategory === opt
-                          ? "bg-teal-500/20 border border-teal-400 text-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.25)]"
-                          : "bg-slate-900/60 border border-white/10 text-slate-400 hover:text-slate-200"
-                      }`}
+                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${compareCategory === opt
+                        ? "bg-teal-500/20 border border-teal-400 text-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.25)]"
+                        : "bg-slate-900/60 border border-white/10 text-slate-400 hover:text-slate-200"
+                        }`}
                     >
                       {opt}
                     </button>
