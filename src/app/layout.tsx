@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   description:
     "Discover universities, programmes, curricula, learning resources and career pathways with Sylmap.",
   icons: {
-    icon: "/fav.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
