@@ -39,7 +39,7 @@ export default function QuickAccess() {
     {
       id: "compare",
       title: "Compare",
-      desc: "Institutions & curricula",
+      desc: "Compare curricula",
       icon: GitCompare,
       color: "cyan",
       iconBg: "bg-cyan-500/20 text-cyan-300 border-cyan-400/30",
@@ -49,7 +49,7 @@ export default function QuickAccess() {
     {
       id: "subjects",
       title: "Subjects",
-      desc: "View detailed syllabus",
+      desc: "Explore syllabus details",
       icon: BookOpen,
       color: "blue",
       iconBg: "bg-blue-500/20 text-blue-300 border-blue-400/30",
@@ -57,14 +57,14 @@ export default function QuickAccess() {
       href: "#subjects",
     },
     {
-      id: "resources",
-      title: "Resources",
-      desc: "Notes & PYQs",
+      id: "learning-hub",
+      title: "Learning Hub",
+      desc: "Study resources & references",
       icon: FileText,
       color: "amber",
       iconBg: "bg-amber-500/20 text-amber-300 border-amber-400/30",
       hoverBorder: "hover:border-amber-400/50",
-      href: "#resources",
+      href: "#learning-hub",
     },
     {
       id: "careers",
@@ -82,7 +82,7 @@ export default function QuickAccess() {
     <div className="w-full mt-1 sm:mt-2">
       {/* Subtitle / Description Copy */}
       <p className="text-xs sm:text-sm text-slate-300/85 font-normal leading-relaxed mb-2 sm:mb-2.5 text-center md:text-left">
-        Discover universities, explore programmes, compare curricula, access
+        Discover universities, explore programmes, compare curricula, access Learning Hub
         resources, and plan your academic future — all in one intelligent
         platform.
       </p>

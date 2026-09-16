@@ -52,10 +52,10 @@ export default function MobileBottomNav() {
       href: "#subjects",
     },
     {
-      id: "resources",
-      title: "Resources",
+      id: "learning-hub",
+      title: "Learning Hub",
       icon: FileText,
-      href: "#resources",
+      href: "#learning-hub",
     },
     {
       id: "careers",

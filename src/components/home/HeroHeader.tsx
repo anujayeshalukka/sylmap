@@ -17,10 +17,10 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
   const navLinks = [
     { label: "Universities", href: "#universities" },
     { label: "Programmes", href: "#programmes" },
-    { label: "Subjects", href: "#subjects" },
-    { label: "Resources", href: "#resources" },
-    { label: "Careers", href: "#careers" },
     { label: "Compare", href: "#compare" },
+    { label: "Subjects", href: "#subjects" },
+    { label: "Learning Hub", href: "#learning-hub" },
+    { label: "Careers", href: "#careers" },
   ];
 
   return (

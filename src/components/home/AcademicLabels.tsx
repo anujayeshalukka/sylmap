@@ -32,9 +32,9 @@ export default function AcademicLabels() {
       position: "top-[48%] right-[-6%] xl:right-[-10%]", // Right Side
     },
     {
-      id: "resources",
-      title: "Resources",
-      desc: "Notes, PYQs, books & more",
+      id: "learning-hub",
+      title: "Learning Hub",
+      desc: "Study resources & references",
       icon: FileText,
       color: "amber",
       iconBg: "bg-amber-500/20 text-amber-300 border-amber-400/30",
