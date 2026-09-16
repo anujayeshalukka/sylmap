@@ -24,17 +24,17 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
   ];
 
   return (
-    <header className="relative z-30 w-full py-1 sm:py-1.5 lg:py-2 flex items-center justify-between border-b border-white/[0.06] bg-transparent">
+    <header className="relative z-30 w-full py-2.5 sm:py-3 lg:py-3.5 flex items-center justify-between border-b border-white/[0.06] bg-transparent">
       {/* Brand Logo */}
       <div className="flex items-center">
-        <Link href="/" className="inline-flex items-center transition-opacity hover:opacity-90">
+        <Link href="/" className="inline-flex items-center transition-opacity hover:opacity-90 leading-none">
           <Image
             src="/sylmap.webp"
             alt="Sylmap"
             width={320}
             height={96}
             priority
-            className="h-10 sm:h-[46px] lg:h-[56px] xl:h-[64px] 2xl:h-[72px] w-auto object-contain transition-all"
+            className="h-10 sm:h-[46px] lg:h-[56px] xl:h-[64px] 2xl:h-[72px] w-auto object-contain transition-all block"
           />
         </Link>
       </div>

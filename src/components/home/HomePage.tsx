@@ -17,7 +17,7 @@ export default function HomePage() {
       <UniverseBackground />
 
       {/* Layer 10 & 2: Outer Content Boundary & Single Unified Responsive Hero Grid */}
-      <div className="relative z-20 flex flex-col min-h-screen justify-between w-full px-4 sm:px-8 lg:px-10 xl:px-[7.5vw] 2xl:px-[6vw] max-w-[1920px] mx-auto py-2 sm:py-3 lg:py-4">
+      <div className="relative z-20 flex flex-col min-h-screen justify-between w-full px-4 sm:px-8 lg:px-10 xl:px-[7.5vw] 2xl:px-[6vw] max-w-[1920px] mx-auto pb-2 sm:pb-3 lg:pb-4 pt-0">
         {/* Top Header Navigation (Parallax Depth: ~3.5px) */}
         <ParallaxLayer maxOffset={3.5}>
           <HeroHeader />
