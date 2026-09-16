@@ -81,7 +81,7 @@ export default function QuickAccess() {
   return (
     <div className="w-full mt-1 sm:mt-2">
       {/* Subtitle / Description Copy */}
-      <p className="text-xs sm:text-sm text-slate-300/85 font-normal leading-relaxed mb-2 sm:mb-2.5 text-center md:text-left">
+      <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed mb-2 sm:mb-2.5 text-center md:text-left">
         Discover universities, explore programmes, compare curricula, access Learning Hub
         resources, and plan your academic future — all in one intelligent
         platform.
@@ -108,7 +108,7 @@ export default function QuickAccess() {
                   <span className="text-xs font-bold text-white tracking-wide truncate group-hover:text-cyan-300 transition-colors">
                     {card.title}
                   </span>
-                  <span className="hidden xl:inline-block text-[10px] text-slate-400 truncate font-normal leading-tight mt-0.5">
+                  <span className="hidden xl:inline-block text-[10px] text-slate-300 truncate font-normal leading-tight mt-0.5">
                     {card.desc}
                   </span>
                 </div>

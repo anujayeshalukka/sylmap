@@ -73,7 +73,7 @@ export default function AcademicLabels() {
                 <span className="text-sm font-bold text-white tracking-wide group-hover:text-cyan-300 transition-colors">
                   {item.title}
                 </span>
-                <span className="text-[11px] text-slate-300/80 font-medium">
+                <span className="text-[11px] text-slate-300 font-medium">
                   {item.desc}
                 </span>
               </div>

@@ -87,7 +87,7 @@ export default function HeroSearch() {
   return (
     <div className="w-full max-w-[820px] flex flex-col gap-2.5 sm:gap-3">
       {/* ONE Primary Unified Search Panel (Dark Navy / Blue Foundation) */}
-      <div className="w-full rounded-2xl bg-[#071a42]/85 border border-cyan-500/40 backdrop-blur-md p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_24px_rgba(0,242,254,0.12)] flex flex-col gap-3">
+      <div className="w-full rounded-2xl bg-[#071a42]/95 border border-cyan-500/40 backdrop-blur-md p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_24px_rgba(0,242,254,0.12)] flex flex-col gap-3">
         {/* Panel Header */}
         <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-2.5">
           <div className="flex items-center flex-wrap gap-2 sm:gap-2.5">
@@ -173,7 +173,7 @@ export default function HeroSearch() {
       {/* Popular Prompt Suggestions Chips (When No Active Result) */}
       {!queryResult && !isLoading && (
         <div className="flex items-center gap-2 flex-wrap pt-0.5 px-1">
-          <span className="text-xs text-slate-400 font-semibold mr-1">
+          <span className="text-xs text-slate-300 font-semibold mr-1">
             Try searching or asking:
           </span>
           {popularSearches.map((chip) => (
@@ -181,7 +181,7 @@ export default function HeroSearch() {
               key={chip.label}
               type="button"
               onClick={() => handleTagClick(chip.query)}
-              className="px-3 py-1 rounded-full text-xs font-medium bg-slate-900/70 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all duration-200"
+              className="px-3 py-1 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-cyan-500/20 text-slate-200 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all duration-200"
             >
               {chip.label}
             </button>
