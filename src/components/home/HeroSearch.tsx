@@ -133,18 +133,14 @@ export default function HeroSearch() {
       {/* ONE Primary Unified Search Panel (Dark Navy / Blue Foundation) */}
       <div className="w-full rounded-2xl bg-[#071a42]/85 border border-cyan-500/40 backdrop-blur-md p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_24px_rgba(0,242,254,0.12)] flex flex-col gap-3">
         {/* Panel Header */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shrink-0">
-            <Search className="w-4 h-4 stroke-[2]" />
-          </div>
-          <div className="flex flex-col">
-            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight">
-              Search &amp; Explore
-            </h3>
-            <span className="text-[11px] sm:text-xs text-slate-300/80 font-normal leading-tight mt-0.5">
-              Unified Academic Search &amp; Discovery
-            </span>
-          </div>
+        <div className="flex items-center flex-wrap gap-2 sm:gap-2.5">
+          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+            Search &amp; Explore
+          </h3>
+          <span className="w-px h-3.5 bg-white/25 shrink-0" />
+          <span className="text-xs text-slate-300/80 font-normal">
+            Unified Academic Search &amp; Discovery
+          </span>
         </div>
 
         {/* ONE Primary Shared Input */}
