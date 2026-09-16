@@ -30,6 +30,7 @@ export interface AIEAnswerData {
   keyInsights: string[];
   sources: VerifiedSource[];
   isVerifiedDataAvailable: boolean;
+  isComparison?: boolean;
 }
 
 export interface AmbiguousOption {
@@ -86,7 +87,7 @@ export function classifyIntent(rawQuery: string): IntentClassification {
     };
   }
 
-  // Natural Language / Question / Comparison Indicators for AIE
+  // Natural Language / Question / Comparison Indicators for AIE or Comparison
   const questionPatterns = [
     "which",
     "what",
@@ -139,8 +140,8 @@ export async function executeRoutedQuery(
     ? { intent: forcedIntent, confidence: 1.0, reason: "Explicit mode requested" }
     : classifyIntent(trimmed);
 
-  // Artificial low latency for real-feel UI transition
-  await new Promise((res) => setTimeout(res, 350));
+  // Low latency simulation for smooth state transition
+  await new Promise((res) => setTimeout(res, 300));
 
   const normalized = trimmed.toLowerCase();
 
@@ -169,7 +170,7 @@ export async function executeRoutedQuery(
     };
   }
 
-  // 2. Handle ACADEMIC_QUESTION_AIE intent
+  // 2. Handle ACADEMIC_QUESTION_AIE intent (Includes comparisons & questions)
   if (classification.intent === "ACADEMIC_QUESTION_AIE") {
     return {
       intent: "ACADEMIC_QUESTION_AIE",
@@ -200,7 +201,7 @@ function getAmbiguousOptions(term: string): AmbiguousOption[] {
         targetQuery: "AI subjects in Semester 5",
       },
       {
-        label: "Ask AIE about AI in CSE",
+        label: "Ask Sylmap: AI in CSE",
         description: "Get grounded AI explanation of Artificial Intelligence core modules.",
         intent: "ACADEMIC_QUESTION_AIE",
         targetQuery: "What is AI in CSE?",
@@ -237,7 +238,6 @@ function getAmbiguousOptions(term: string): AmbiguousOption[] {
     ];
   }
 
-  // Default fallback for ambiguous terms like "Semester 5"
   return [
     {
       label: `Search "${term}" Catalog`,
@@ -246,7 +246,7 @@ function getAmbiguousOptions(term: string): AmbiguousOption[] {
       targetQuery: `${term} subjects in B.Tech`,
     },
     {
-      label: `Ask AIE about ${term}`,
+      label: `Ask Sylmap about ${term}`,
       description: `Get AI analysis of core curriculum requirement for ${term}.`,
       intent: "ACADEMIC_QUESTION_AIE",
       targetQuery: `Which universities teach core subjects in ${term}?`,
@@ -257,12 +257,12 @@ function getAmbiguousOptions(term: string): AmbiguousOption[] {
 function generateAIEAnswer(query: string, state: string): AIEAnswerData {
   const lower = query.toLowerCase();
 
-  if (lower.includes("compare vtu and ktu") || lower.includes("vtu vs ktu")) {
+  if (lower.includes("compare vtu and ktu") || lower.includes("vtu vs ktu") || lower.includes("compare")) {
     return {
       query,
       answer: `Visvesvaraya Technological University (VTU) and APJ Abdul Kalam Technological University (KTU) both follow Outcome-Based Education (OBE) for B.Tech Computer Science & Engineering (CSE). 
 
-Key Comparison Highlights:
+Structured Comparison Overview:
 - **VTU 2022 Scheme**: Integrates AI & Machine Learning starting from Semester 5 with 4 credits per core module. Emphasizes skill-lab integration.
 - **KTU 2019 Scheme**: Focuses heavily on Foundations of Data Science in Semester 5 with dedicated industry project credits in Semester 7.`,
       keyInsights: [
@@ -285,6 +285,7 @@ Key Comparison Highlights:
         },
       ],
       isVerifiedDataAvailable: true,
+      isComparison: true,
     };
   }
 
@@ -298,33 +299,33 @@ Key Comparison Highlights:
 3. **Anna University (Tamil Nadu)** - *Course Code: CS3551*
 
 All three universities include Search Algorithms, Knowledge Representation, Neural Networks, and Natural Language Processing in their verified syllabus.`,
-    keyInsights: [
-      "VTU includes AI laboratory experiments alongside 21CS51 theory",
-      "Anna University pairs AI with Machine Learning prerequisites",
-      "Verified against official 2022/2023 University Academic Syllabi",
-    ],
-    sources: [
-      {
-        title: "VTU 2022 Scheme CSE Syllabus - 5th Semester",
-        institution: "Visvesvaraya Technological University",
-        scheme: "2022 Scheme",
-        verified: true,
-      },
-      {
-        title: "Anna University Regulation 2021 Syllabus",
-        institution: "Anna University",
-        scheme: "2021 Regulation",
-        verified: true,
-      },
-    ],
-    isVerifiedDataAvailable: true,
-  };
-}
+      keyInsights: [
+        "VTU includes AI laboratory experiments alongside 21CS51 theory",
+        "Anna University pairs AI with Machine Learning prerequisites",
+        "Verified against official 2022/2023 University Academic Syllabi",
+      ],
+      sources: [
+        {
+          title: "VTU 2022 Scheme CSE Syllabus - 5th Semester",
+          institution: "Visvesvaraya Technological University",
+          scheme: "2022 Scheme",
+          verified: true,
+        },
+        {
+          title: "Anna University Regulation 2021 Syllabus",
+          institution: "Anna University",
+          scheme: "2021 Regulation",
+          verified: true,
+        },
+      ],
+      isVerifiedDataAvailable: true,
+      isComparison: false,
+    };
+  }
 
-  // Default AIE grounded response
   return {
     query,
-    answer: `Sylmap Academic Intelligence Engine (AIE) response for "${query}":
+    answer: `Sylmap Academic Intelligence Engine (AIE) grounded response for "${query}":
 
 According to verified Sylmap curriculum data for ${state}, core Computer Science & Engineering programmes integrate Artificial Intelligence, Data Structures, and Software Engineering modules across Semesters 3 to 6.`,
     keyInsights: [
@@ -340,6 +341,7 @@ According to verified Sylmap curriculum data for ${state}, core Computer Science
       },
     ],
     isVerifiedDataAvailable: true,
+    isComparison: false,
   };
 }
 
