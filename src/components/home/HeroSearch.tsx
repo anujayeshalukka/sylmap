@@ -86,61 +86,56 @@ export default function HeroSearch() {
 
   return (
     <div className="w-full max-w-[820px] flex flex-col gap-2.5 sm:gap-3">
-      {/* Top Location Context Bar */}
-      <div className="flex items-center justify-between pb-0.5 px-1 flex-wrap gap-2">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-300/90 tracking-wide">
-            Explore in:
-          </span>
-          <div className="relative inline-flex items-center">
-            <MapPin className="w-3.5 h-3.5 text-cyan-400 absolute left-2.5 pointer-events-none" />
-            <select
-              value={selectedState}
-              onChange={(e) => setSelectedState(e.target.value)}
-              className="appearance-none bg-slate-900/90 hover:bg-slate-800/90 border border-teal-500/40 hover:border-cyan-400/60 rounded-lg pl-8 pr-7 py-1 text-xs font-bold text-cyan-300 focus:outline-none focus:border-cyan-400 shadow-[0_0_12px_rgba(0,242,254,0.15)] cursor-pointer transition-all"
-            >
-              {regionList.map((region) => (
-                <option key={region} value={region} className="bg-slate-950 text-white font-medium">
-                  {region}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2 pointer-events-none" />
-          </div>
-        </div>
-
-        {/* Active Intent Status Badge when result is present */}
-        {queryResult && (
-          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-cyan-400/30 text-[11px] font-semibold text-cyan-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span>
-              {queryResult.intent === "SEARCH_DISCOVERY" && "Search Results"}
-              {queryResult.intent === "ACADEMIC_QUESTION_AIE" &&
-                (queryResult.aieAnswer?.isComparison ? "Comparison Response" : "Ask Sylmap / AI Answer")}
-              {queryResult.intent === "AMBIGUOUS" && "Clarification Needed"}
-            </span>
-            <button
-              onClick={handleClearResults}
-              className="ml-1 text-slate-400 hover:text-white"
-              title="Reset search"
-            >
-              <X className="w-3 h-3" />
-            </button>
-          </div>
-        )}
-      </div>
-
       {/* ONE Primary Unified Search Panel (Dark Navy / Blue Foundation) */}
       <div className="w-full rounded-2xl bg-[#071a42]/85 border border-cyan-500/40 backdrop-blur-md p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_24px_rgba(0,242,254,0.12)] flex flex-col gap-3">
         {/* Panel Header */}
-        <div className="flex items-center flex-wrap gap-2 sm:gap-2.5">
-          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
-            Search &amp; Explore
-          </h3>
-          <span className="w-px h-3.5 bg-white/25 shrink-0" />
-          <span className="text-xs text-slate-300/80 font-normal">
-            Unified Academic Search &amp; Discovery
-          </span>
+        <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-2.5">
+          <div className="flex items-center flex-wrap gap-2 sm:gap-2.5">
+            {/* Primary Heading */}
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+              Search &amp; Explore
+            </h3>
+
+            {/* Subtle Vertical Divider */}
+            <span className="w-px h-3.5 bg-white/25 shrink-0" />
+
+            {/* Compact State Context Selector: 📍 Karnataka ▾ */}
+            <div className="relative inline-flex items-center">
+              <MapPin className="w-3.5 h-3.5 text-cyan-400 absolute left-2.5 pointer-events-none" />
+              <select
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                className="appearance-none bg-slate-900/90 hover:bg-slate-800/90 border border-teal-500/40 hover:border-cyan-400/60 rounded-lg pl-8 pr-7 py-1 text-xs font-bold text-cyan-300 focus:outline-none focus:border-cyan-400 shadow-[0_0_12px_rgba(0,242,254,0.15)] cursor-pointer transition-all"
+              >
+                {regionList.map((region) => (
+                  <option key={region} value={region} className="bg-slate-950 text-white font-medium">
+                    {region}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2 pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Active Intent Status Badge when result is present */}
+          {queryResult && (
+            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-cyan-400/30 text-[11px] font-semibold text-cyan-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              <span>
+                {queryResult.intent === "SEARCH_DISCOVERY" && "Search Results"}
+                {queryResult.intent === "ACADEMIC_QUESTION_AIE" &&
+                  (queryResult.aieAnswer?.isComparison ? "Comparison Response" : "Ask Sylmap / AI Answer")}
+                {queryResult.intent === "AMBIGUOUS" && "Clarification Needed"}
+              </span>
+              <button
+                onClick={handleClearResults}
+                className="ml-1 text-slate-400 hover:text-white"
+                title="Reset search"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* ONE Primary Shared Input */}
