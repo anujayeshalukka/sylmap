@@ -12,19 +12,19 @@ import ParallaxLayer from "./ParallaxLayer";
 
 export default function HomePage() {
   return (
-    <main className="home-shell bg-slate-950 text-slate-100 flex flex-col justify-between select-none overflow-hidden relative">
+    <main className="home-shell bg-slate-950 text-slate-100 flex flex-col justify-between select-none relative min-h-screen">
       {/* Layer 0: Universe Background (Completely Static) */}
       <UniverseBackground />
 
       {/* Layer 10 & 2: Outer Content Boundary & Single Unified Responsive Hero Grid */}
-      <div className="relative z-20 flex flex-col h-[100dvh] max-h-[100dvh] justify-between w-full px-4 sm:px-8 lg:px-10 xl:px-[7.5vw] 2xl:px-[6vw] max-w-[1920px] mx-auto py-0 overflow-hidden">
+      <div className="relative z-20 flex flex-col min-h-screen justify-between w-full px-4 sm:px-8 lg:px-10 xl:px-[7.5vw] 2xl:px-[6vw] max-w-[1920px] mx-auto py-2 sm:py-3 lg:py-4">
         {/* Top Header Navigation (Parallax Depth: ~3.5px) */}
         <ParallaxLayer maxOffset={3.5}>
           <HeroHeader />
         </ParallaxLayer>
 
         {/* Unified Hero Two-Column Grid: Left Content (~55%) + Right Earth Composition (~45%) */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 items-center gap-6 lg:gap-8 my-auto py-1 sm:py-2 min-h-0">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 items-center gap-6 lg:gap-8 my-auto py-4 sm:py-6 lg:py-8 min-h-0">
           {/* Left Column: Platform Badge, Headline, Subtitle & Search UI (Parallax Depth: ~7px) */}
           <div className="col-span-1 lg:col-span-7 flex flex-col justify-center items-center lg:items-start gap-4 sm:gap-5 w-full max-w-[820px] mx-auto lg:mx-0">
             <ParallaxLayer maxOffset={7} className="flex flex-col items-center lg:items-start gap-4 sm:gap-5 w-full">
@@ -48,7 +48,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom Quick Access Shortcuts (Parallax Depth: ~5px) */}
-        <ParallaxLayer maxOffset={5} className="pb-20 md:pb-4 w-full">
+        <ParallaxLayer maxOffset={5} className="pb-24 md:pb-4 w-full">
           <QuickAccess />
         </ParallaxLayer>
       </div>

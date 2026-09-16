@@ -9,15 +9,11 @@
   --sylmap-cyan-light: #38EF7D;
 }
 
-/* Homepage single-viewport constraint */
+/* Homepage content shell with responsive height and natural vertical scrolling */
 .home-shell {
-  height: 100dvh;
   min-height: 100dvh;
-  max-height: 100dvh;
-  width: 100vw;
-  overflow: hidden;
+  width: 100%;
   position: relative;
-  touch-action: none;
 }
 
 /* Glassmorphism Surface Tokens */
