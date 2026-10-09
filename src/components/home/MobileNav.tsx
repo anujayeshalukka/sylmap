@@ -3,6 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { X, Sparkles, User } from "lucide-react";
+import { accountNav } from "@/config/navigation";
+import { Drawer } from "@/components/ui/Drawer";
+import { IconButton } from "@/components/ui/IconButton";
+import { Divider } from "@/components/ui/Divider";
+import { typography } from "@/styles/tokens";
+import { cn } from "@/lib/cn";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -12,56 +18,47 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ isOpen, onClose, links, user = null }: MobileNavProps) {
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-slate-950/95 backdrop-blur-2xl p-6 transition-all duration-300 animate-in fade-in slide-in-from-top-4">
+    <Drawer open={isOpen} onClose={onClose} label="Main menu" className="lg:hidden">
       {/* Drawer Top Header */}
-      <div className="flex items-center justify-between pb-6 border-b border-white/10">
+      <div className="flex items-center justify-between pb-6 border-b border-line/10">
         <div className="flex items-center">
-          <Image
-            src="/sylmap.webp"
-            alt="Sylmap"
-            width={240}
-            height={72}
-            className="h-9 sm:h-11 w-auto object-contain"
-          />
+          <Image src="/sylmap.webp" alt="Sylmap" width={240} height={72} className="h-9 sm:h-11 w-auto object-contain" />
         </div>
-        <button
-          onClick={onClose}
-          aria-label="Close menu"
-          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10"
-        >
+        <IconButton onClick={onClose} aria-label="Close menu">
           <X className="w-6 h-6 stroke-[2]" />
-        </button>
+        </IconButton>
       </div>
 
       {/* Main Navigation Links */}
-      <div className="flex-1 my-8 flex flex-col gap-5">
+      <nav aria-label="Primary" className="flex-1 my-8 flex flex-col gap-5">
         {links.map((link) => (
           <Link
             key={link.label}
             href={link.href}
             onClick={onClose}
-            className="text-lg font-semibold text-slate-200 hover:text-cyan-300 transition-colors flex items-center justify-between py-2 border-b border-white/5"
+            className={cn(
+              typography.navDrawer,
+              "text-fg-body hover:text-accent-text transition-colors flex items-center justify-between py-2 border-b border-line/5",
+            )}
           >
             <span>{link.label}</span>
-            <span className="text-xs text-slate-500 font-mono">→</span>
+            <span className="text-xs text-fg-faint font-mono">→</span>
           </Link>
         ))}
-      </div>
+      </nav>
 
       {/* Secondary Actions & Tag */}
-      <div className="flex flex-col gap-3 pt-6 border-t border-white/10">
-        <div className="flex items-center gap-2 text-xs text-cyan-400/90 font-medium mb-1">
+      <div className="flex flex-col gap-3 pt-6 border-t border-line/10">
+        <div className="flex items-center gap-2 text-xs text-accent/90 font-medium mb-1">
           <Sparkles className="w-4 h-4" />
           <span>AI-Powered Academic Discovery</span>
         </div>
 
         <Link
-          href={user ? "/profile" : "/login"}
+          href={user ? accountNav.profileHref : accountNav.loginHref}
           onClick={onClose}
-          className="w-full py-2.5 rounded-xl font-medium text-sm text-slate-200 hover:text-cyan-300 flex items-center justify-center gap-2 transition-colors border-t border-white/10 pt-4"
+          className="w-full py-2.5 rounded-card font-medium text-sm text-fg-body hover:text-accent-text flex items-center justify-center gap-2 transition-colors border-t border-line/10 pt-4"
         >
           {user ? (
             user.avatar ? (
@@ -70,22 +67,22 @@ export default function MobileNav({ isOpen, onClose, links, user = null }: Mobil
                 alt={user.name}
                 width={22}
                 height={22}
-                className="w-5.5 h-5.5 rounded-full object-cover border border-cyan-400/50"
+                className="w-5.5 h-5.5 rounded-full object-cover border border-accent/50"
               />
             ) : (
-              <div className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 flex items-center justify-center text-[10px] font-bold">
+              <div className="w-5 h-5 rounded-full bg-accent-fill/20 text-accent-text border border-accent/40 flex items-center justify-center text-micro font-bold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
             )
           ) : (
-            <User className="w-4 h-4 text-cyan-400" />
+            <User className="w-4 h-4 text-accent" />
           )}
 
-          <span className="w-px h-3.5 bg-white/20 mx-0.5" />
+          <Divider className="mx-0.5" />
 
           <span>{user ? user.name : "Login"}</span>
         </Link>
       </div>
-    </div>
+    </Drawer>
   );
 }

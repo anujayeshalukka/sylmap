@@ -1,5 +1,7 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
+/* Brand reference colours (also exported for SVG use from src/styles/tokens/colors.ts) */
 :root {
   --sylmap-navy: #0D3B6E;
   --sylmap-navy-dark: #071A42;
@@ -9,6 +11,92 @@
   --sylmap-cyan-light: #38EF7D;
 }
 
+/* Accessibility states */
+@layer base {
+  /* Keyboard focus uses the cyan focus language; mouse focus is unchanged. Utilities such as outline-none still win. */
+  :where(a, button, summary, select, [role="button"], [role="tab"], [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *:not(.animate-spin),
+    *::before,
+    *::after {
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .animate-pulse,
+    .animate-ping,
+    .animate-subtle-float {
+      animation: none !important;
+    }
+  }
+}
+
+/*
+ * Experimental homepage preloader (src/components/home-experimental).
+ * Safety net: if JavaScript never runs, the overlay fades away on its own so the page stays usable.
+ * Reduced motion: the intro is skipped entirely.
+ */
+@keyframes sylmap-preloader-autohide {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.sylmap-preloader {
+  animation: sylmap-preloader-autohide 400ms ease 3.2s forwards;
+}
+
+/* Intro entrance animations: pure CSS so they start at first paint, before hydration. */
+@keyframes sylmap-intro-globe {
+  from { opacity: 0; transform: scale(0.82); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes sylmap-intro-orbits {
+  from { opacity: 0; transform: scale(0.9) rotate(-8deg); }
+  to { opacity: 0.8; transform: scale(1) rotate(0deg); }
+}
+@keyframes sylmap-intro-fade-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sylmap-intro-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sylmap-intro-from-left {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sylmap-intro-from-right {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sylmap-intro-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.sylmap-intro-globe { animation: sylmap-intro-globe 900ms var(--ease-emphasized) both; }
+.sylmap-intro-orbits { animation: sylmap-intro-orbits 1100ms var(--ease-emphasized) 200ms both; }
+.sylmap-intro-fade-down { animation: sylmap-intro-fade-down 600ms var(--ease-emphasized) both; }
+.sylmap-intro-rise { animation: sylmap-intro-rise 500ms var(--ease-emphasized) both; }
+.sylmap-intro-from-left { animation: sylmap-intro-from-left 500ms var(--ease-emphasized) both; }
+.sylmap-intro-from-right { animation: sylmap-intro-from-right 500ms var(--ease-emphasized) both; }
+/* Duration must match PRELOADER_INTRO_MS; the controller exits when this animation ends. */
+.sylmap-intro-progress { animation: sylmap-intro-progress 2000ms linear both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sylmap-preloader {
+    display: none;
+  }
+}
+
 /* Homepage content shell with responsive height and natural vertical scrolling */
 .home-shell {
   min-height: 100dvh;
@@ -16,7 +104,11 @@
   position: relative;
 }
 
-/* Glassmorphism Surface Tokens */
+/*
+ * Glassmorphism surface classes.
+ * These are intentionally unlayered: they override Tailwind utilities on the same element,
+ * which is how the homepage renders today (e.g. the quick-access hover border is always cyan).
+ */
 .sylmap-glass {
   background: rgba(13, 59, 110, 0.35);
   backdrop-filter: blur(16px);
@@ -27,18 +119,24 @@
 
 .sylmap-glass-card {
   background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--blur-panel));
+  -webkit-backdrop-filter: blur(var(--blur-panel));
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-card);
+  transition: all var(--duration-card) var(--ease-standard);
 }
 
 .sylmap-glass-card:hover {
   background: rgba(24, 112, 197, 0.2);
   border-color: rgba(0, 242, 254, 0.35);
-  box-shadow: 0 8px 28px rgba(0, 242, 254, 0.15);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sylmap-glass-card:hover {
+    transform: none;
+  }
 }
 
 .sylmap-glass-input {
@@ -70,36 +168,3 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-
-/* Subtle Pulsing & Orbit Effects */
-@keyframes subtle-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-4px); }
-}
-
-.animate-subtle-float {
-  animation: subtle-float 6s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-subtle-float {
-    animation: none;
-  }
-}
-
-/* Mobile Nav Active Label Animation */
-@keyframes nav-label-fade {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-nav-label-in {
-  animation: nav-label-fade 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-

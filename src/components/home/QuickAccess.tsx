@@ -1,87 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import {
-  Landmark,
-  GraduationCap,
-  GitCompare,
-  BookOpen,
-  FileText,
-  Rocket,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { primaryNav } from "@/config/navigation";
+import { Card } from "@/components/ui/Card";
+import { cn } from "@/lib/cn";
 
 export default function QuickAccess() {
-  const [activeMobileId, setActiveMobileId] = useState<string | null>(null);
-
-  const cards = [
-    {
-      id: "universities",
-      title: "Universities",
-      desc: "Explore institutions",
-      icon: Landmark,
-      color: "teal",
-      iconBg: "bg-teal-500/20 text-teal-300 border-teal-400/30",
-      hoverBorder: "hover:border-teal-400/50",
-      href: "#universities",
-    },
-    {
-      id: "programmes",
-      title: "Programmes",
-      desc: "Browse courses",
-      icon: GraduationCap,
-      color: "purple",
-      iconBg: "bg-purple-500/20 text-purple-300 border-purple-400/30",
-      hoverBorder: "hover:border-purple-400/50",
-      href: "#programmes",
-    },
-    {
-      id: "compare",
-      title: "Compare",
-      desc: "Compare curricula",
-      icon: GitCompare,
-      color: "cyan",
-      iconBg: "bg-cyan-500/20 text-cyan-300 border-cyan-400/30",
-      hoverBorder: "hover:border-cyan-400/50",
-      href: "#compare",
-    },
-    {
-      id: "subjects",
-      title: "Subjects",
-      desc: "Explore syllabus details",
-      icon: BookOpen,
-      color: "blue",
-      iconBg: "bg-blue-500/20 text-blue-300 border-blue-400/30",
-      hoverBorder: "hover:border-blue-400/50",
-      href: "#subjects",
-    },
-    {
-      id: "learning-hub",
-      title: "Learning Hub",
-      desc: "Study resources & references",
-      icon: FileText,
-      color: "amber",
-      iconBg: "bg-amber-500/20 text-amber-300 border-amber-400/30",
-      hoverBorder: "hover:border-amber-400/50",
-      href: "#learning-hub",
-    },
-    {
-      id: "careers",
-      title: "Careers",
-      desc: "Explore career paths",
-      icon: Rocket,
-      color: "emerald",
-      iconBg: "bg-emerald-500/20 text-emerald-300 border-emerald-400/30",
-      hoverBorder: "hover:border-emerald-400/50",
-      href: "#careers",
-    },
-  ];
-
   return (
     <div className="w-full mt-1 sm:mt-2">
       {/* Subtitle / Description Copy */}
-      <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed mb-2 sm:mb-2.5 text-center md:text-left">
+      <p className="text-xs sm:text-sm text-fg-secondary font-normal leading-relaxed mb-2 sm:mb-2.5 text-center md:text-left">
         Discover universities, explore programmes, compare curricula, access Learning Hub
         resources, and plan your academic future — all in one intelligent
         platform.
@@ -89,33 +18,43 @@ export default function QuickAccess() {
 
       {/* Desktop & Tablet Navigation Cards (>= 768px) */}
       <div className="hidden md:grid md:grid-cols-6 gap-2.5 sm:gap-3">
-        {cards.map((card) => {
+        {primaryNav.map((card) => {
           const Icon = card.icon;
           return (
-            <Link
+            <Card
               key={card.id}
+              as={Link}
               href={card.href}
-              className={`group flex items-center justify-between p-2.5 sm:p-3 rounded-xl sm:rounded-2xl sylmap-glass-card border border-white/10 ${card.hoverBorder} transition-all duration-300`}
+              variant="glass"
+              interactive
+              padded={false}
+              className={cn(
+                "group flex items-center justify-between p-2.5 sm:p-3 rounded-card sm:rounded-panel",
+                card.color.hoverBorder,
+              )}
             >
               <div className="flex items-center gap-2 min-w-0">
                 <div
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center border ${card.iconBg} transition-transform duration-300 group-hover:scale-105 flex-shrink-0`}
+                  className={cn(
+                    "w-7 h-7 sm:w-8 sm:h-8 rounded-card flex items-center justify-center border transition-transform duration-300 group-hover:scale-105 flex-shrink-0",
+                    card.color.tile,
+                  )}
                 >
                   <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2]" />
                 </div>
 
                 <div className="flex flex-col min-w-0">
-                  <span className="text-xs font-bold text-white tracking-wide truncate group-hover:text-cyan-300 transition-colors">
-                    {card.title}
+                  <span className="text-xs font-bold text-fg tracking-wide truncate group-hover:text-accent-text transition-colors">
+                    {card.label}
                   </span>
-                  <span className="hidden xl:inline-block text-[10px] text-slate-300 truncate font-normal leading-tight mt-0.5">
-                    {card.desc}
+                  <span className="hidden xl:inline-block text-micro text-fg-secondary truncate font-normal leading-tight mt-0.5">
+                    {card.description}
                   </span>
                 </div>
               </div>
 
-              <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-            </Link>
+              <ChevronRight className="w-3.5 h-3.5 text-fg-faint group-hover:text-accent-text group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+            </Card>
           );
         })}
       </div>

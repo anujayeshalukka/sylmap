@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useMotionValue, useSpring, motion } from "framer-motion";
-import { motion as motionTokens } from "@/styles/tokens";
 
 interface ParallaxLayerProps {
   children: React.ReactNode;
@@ -18,14 +17,12 @@ export default function ParallaxLayer({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Ultra-smooth spring physics for GPU-accelerated motion
-  const springX = useSpring(mouseX, motionTokens.parallaxSpring);
-  const springY = useSpring(mouseY, motionTokens.parallaxSpring);
+  const springX = useSpring(mouseX, { stiffness: 90, damping: 20, mass: 0.4 });
+  const springY = useSpring(mouseY, { stiffness: 90, damping: 20, mass: 0.4 });
 
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    // Enable only on fine-pointer desktop devices with no reduced motion preference
     const mediaQuery = window.matchMedia(
       "(pointer: fine) and (prefers-reduced-motion: no-preference)"
     );

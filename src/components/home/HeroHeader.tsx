@@ -3,28 +3,25 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { User, Menu, X } from "lucide-react";
+import { User, X } from "lucide-react";
 import MobileNav from "./MobileNav";
+import { primaryNav, accountNav } from "@/config/navigation";
+import { Divider } from "@/components/ui/Divider";
+import { IconButton } from "@/components/ui/IconButton";
+import { typography } from "@/styles/tokens";
+import { cn } from "@/lib/cn";
 
 interface HeroHeaderProps {
+  /** Reserved for focusing the search from the header; not used yet */
   onSearchFocus?: () => void;
   user?: { name: string; avatar?: string } | null;
 }
 
-export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderProps) {
+export default function HeroHeader({ user = null }: HeroHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks = [
-    { label: "Universities", href: "#universities" },
-    { label: "Programmes", href: "#programmes" },
-    { label: "Compare", href: "#compare" },
-    { label: "Subjects", href: "#subjects" },
-    { label: "Learning Hub", href: "#learning-hub" },
-    { label: "Careers", href: "#careers" },
-  ];
-
   return (
-    <header className="relative z-30 w-full py-2.5 sm:py-3 lg:py-3.5 flex items-center justify-between border-b border-white/[0.06] bg-transparent">
+    <header className="relative z-30 w-full py-2.5 sm:py-3 lg:py-3.5 flex items-center justify-between border-b border-line/[0.06] bg-transparent">
       {/* Brand Logo */}
       <div className="flex items-center">
         <Link href="/" className="inline-flex items-center transition-opacity hover:opacity-90 leading-none">
@@ -40,15 +37,11 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
       </div>
 
       {/* Desktop Navigation Links */}
-      <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
-        {navLinks.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className="hover:text-cyan-300 transition-colors py-1 relative group"
-          >
+      <nav aria-label="Primary" className={cn("hidden lg:flex items-center gap-7 text-fg-secondary", typography.nav)}>
+        {primaryNav.map((link) => (
+          <Link key={link.id} href={link.href} className="hover:text-accent-text transition-colors py-1 relative group">
             {link.label}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 transition-all duration-300 group-hover:w-full" />
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-secondary transition-all duration-300 group-hover:w-full group-focus-visible:w-full" />
           </Link>
         ))}
       </nav>
@@ -57,8 +50,8 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
       <div className="flex items-center gap-2.5 sm:gap-4">
         {/* Borderless Account Control (Logged-out & Logged-in) */}
         <Link
-          href={user ? "/profile" : "/login"}
-          className="inline-flex items-center gap-1.5 text-slate-300 hover:text-cyan-300 text-xs sm:text-sm font-medium transition-colors py-1 group"
+          href={user ? accountNav.profileHref : accountNav.loginHref}
+          className="inline-flex items-center gap-1.5 text-fg-secondary hover:text-accent-text text-xs sm:text-sm font-medium transition-colors py-1 group"
         >
           {user ? (
             user.avatar ? (
@@ -67,28 +60,28 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
                 alt={user.name}
                 width={22}
                 height={22}
-                className="w-5.5 h-5.5 rounded-full object-cover border border-cyan-400/50"
+                className="w-5.5 h-5.5 rounded-full object-cover border border-accent/50"
               />
             ) : (
-              <div className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 flex items-center justify-center text-[10px] font-bold">
+              <div className="w-5 h-5 rounded-full bg-accent-fill/20 text-accent-text border border-accent/40 flex items-center justify-center text-micro font-bold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
             )
           ) : (
-            <User className="w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+            <User className="w-4 h-4 text-accent group-hover:text-accent-text transition-colors" />
           )}
 
-          {/* Thin vertical divider */}
-          <span className="w-px h-3.5 bg-white/20 mx-0.5" />
+          <Divider className="mx-0.5" />
 
           <span>{user ? user.name : "Login"}</span>
         </Link>
 
         {/* Mobile Hamburger Toggle */}
-        <button
+        <IconButton
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Mobile Menu"
-          className="lg:hidden py-2 pl-2 pr-0 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors flex items-center justify-center"
+          aria-expanded={mobileMenuOpen}
+          className="lg:hidden py-2 pl-2 pr-0 text-fg-secondary transition-colors"
         >
           {mobileMenuOpen ? (
             <X className="w-6 h-6 stroke-[2]" />
@@ -103,6 +96,7 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
               strokeLinecap="round"
               strokeLinejoin="round"
               className="w-6 h-6"
+              aria-hidden
             >
               {/* Top shorter line (right-aligned) */}
               <line x1="10" y1="7" x2="22" y2="7" />
@@ -110,15 +104,11 @@ export default function HeroHeader({ onSearchFocus, user = null }: HeroHeaderPro
               <line x1="2" y1="16" x2="22" y2="16" />
             </svg>
           )}
-        </button>
+        </IconButton>
       </div>
 
       {/* Mobile Drawer Overlay */}
-      <MobileNav
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-        links={navLinks}
-      />
+      <MobileNav isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} links={primaryNav} user={user} />
     </header>
   );
 }

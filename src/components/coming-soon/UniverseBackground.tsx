@@ -15,10 +15,10 @@ export default function UniverseBackground() {
         <source src="/sylmapbgvideo.mp4" type="video/mp4" />
       </video>
 
-      {/* Subtle Atmospheric Vignette & Contrast Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-canvas/90 via-canvas/40 to-canvas/70" />
-      <div className="absolute inset-0 bg-gradient-to-b from-canvas/80 via-transparent to-canvas/90" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-canvas/30 to-canvas/80" />
+      {/* Subtle Atmospheric Vignette & Contrast Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/40 to-slate-950/90" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-transparent to-slate-950/95" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-slate-950/30 to-slate-950/85" />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function EarthScene() {
         priority
         quality={95}
         sizes="(max-width: 768px) 300px, 500px"
-        className="object-contain drop-shadow-[0_0_35px_rgba(0,242,254,0.25)] select-none"
+        className="object-contain drop-shadow-glow-earth select-none"
       />
     </div>
   );

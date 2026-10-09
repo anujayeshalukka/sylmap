@@ -1,0 +1,125 @@
+/*
+ * Sylmap Design System V1 — design tokens.
+ *
+ * Every value here is taken from the homepage as implemented (see DESIGN_SYSTEM.md).
+ * Tailwind v4 turns each theme variable into utilities, e.g.
+ *   --color-surface-panel  → bg-surface-panel, border-surface-panel, text-surface-panel
+ *   --radius-panel         → rounded-panel
+ *   --shadow-panel         → shadow-panel
+ *   --text-micro           → text-micro
+ *   --container-content    → max-w-content
+ * Tailwind's default palette, spacing scale and breakpoints are kept as-is.
+ */
+
+@theme {
+  /* ---------- Color: canvas & surfaces ---------- */
+  --color-canvas: var(--color-slate-950);
+  --color-surface-panel: #071a42;
+  --color-surface-result: #040b19;
+  --color-surface-clarify: #05152a;
+  --color-surface-empty: #0b1220;
+  --color-surface-inner: var(--color-slate-900);
+  --color-surface-hover: var(--color-slate-800);
+
+  /* ---------- Color: brand accent ---------- */
+  --color-glow: #00f2fe;
+  --color-accent: var(--color-cyan-400);
+  --color-accent-text: var(--color-cyan-300);
+  --color-accent-fill: var(--color-cyan-500);
+  --color-accent-soft: var(--color-cyan-200);
+  --color-secondary: var(--color-teal-400);
+  --color-secondary-fill: var(--color-teal-500);
+
+  /* ---------- Color: text ---------- */
+  --color-fg: var(--color-white);
+  --color-fg-default: var(--color-slate-100);
+  --color-fg-body: var(--color-slate-200);
+  --color-fg-secondary: var(--color-slate-300);
+  --color-fg-muted: var(--color-slate-400);
+  --color-fg-faint: var(--color-slate-500);
+
+  /* ---------- Color: lines (always used with an opacity modifier, e.g. border-line/10) ---------- */
+  --color-line: var(--color-white);
+
+  /* ---------- Color: status ---------- */
+  --color-success: var(--color-teal-400);
+  --color-success-fill: var(--color-teal-500);
+  --color-success-text: var(--color-teal-300);
+  --color-success-soft: var(--color-teal-200);
+  --color-warning: var(--color-amber-400);
+  --color-warning-fill: var(--color-amber-500);
+  /* Danger is the one V1 addition: the homepage has no error colour yet. Tailwind red, default palette. */
+  --color-danger: var(--color-red-400);
+  --color-danger-fill: var(--color-red-500);
+  --color-danger-text: var(--color-red-300);
+
+  /* ---------- Typography ---------- */
+  --text-micro: 0.625rem; /* 10px */
+  --text-2xs: 0.6875rem; /* 11px */
+
+  /* ---------- Layout ---------- */
+  --container-shell: 1920px;
+  --container-content: 820px;
+
+  /* ---------- Radius ---------- */
+  --radius-panel: 1rem; /* 16px — panels, result cards */
+  --radius-card: 0.75rem; /* 12px — inner cards, inputs, secondary buttons, icon tiles */
+  --radius-control: 0.5rem; /* 8px — selects, small badges, ghost buttons */
+  --radius-tag: 0.375rem; /* 6px — uppercase type tags */
+  --radius-dock: 24px; /* mobile bottom navigation */
+
+  /* ---------- Blur ---------- */
+  --blur-panel: 12px;
+  --blur-overlay: 40px;
+
+  /* ---------- Shadow & glow ---------- */
+  --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-panel-glow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 242, 254, 0.12);
+  --shadow-dock: 0 8px 32px rgba(0, 0, 0, 0.65);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 8px 28px rgba(0, 242, 254, 0.15);
+  --shadow-glow-sm: 0 0 12px rgba(0, 242, 254, 0.15);
+  --shadow-glow-badge: 0 0 15px rgba(0, 242, 254, 0.15);
+  --shadow-glow-md: 0 0 12px rgba(0, 242, 254, 0.2);
+  --shadow-glow-active: 0 0 12px rgba(0, 242, 254, 0.25);
+  --shadow-glow-focus: 0 0 20px rgba(0, 242, 254, 0.2);
+  --shadow-glow-hover: 0 0 20px rgba(0, 242, 254, 0.3);
+  --shadow-glow-button: 0 0 18px rgba(0, 242, 254, 0.45);
+  --drop-shadow-glow-earth: 0 0 35px rgba(0, 242, 254, 0.25);
+  --drop-shadow-glow-icon: 0 0 8px rgba(0, 242, 254, 0.6);
+
+  /* ---------- Motion ---------- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-nav-label-in: nav-label-fade 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-subtle-float: subtle-float 6s ease-in-out infinite;
+
+  @keyframes nav-label-fade {
+    from {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes subtle-float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+/* Plain CSS custom properties for values Tailwind has no theme namespace for. */
+:root {
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-card: 250ms;
+  --duration-slow: 300ms;
+}

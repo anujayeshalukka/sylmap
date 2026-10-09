@@ -1,5 +1,18 @@
 "use client";
 
+import { Fragment } from "react";
+import { sectionColors } from "@/config/sections";
+import { brandColors, glow } from "@/styles/tokens";
+
+/** Orbit node anchors (homepage composition), coloured from the section config. */
+const nodes = [
+  { cx: 210, cy: 240, color: sectionColors.universities.node }, // Top-left (Universities anchor)
+  { cx: 590, cy: 220, color: sectionColors.programmes.node }, // Top-right (Programmes anchor)
+  { cx: 680, cy: 420, color: sectionColors.subjects.node }, // Right (Subjects anchor)
+  { cx: 280, cy: 560, color: sectionColors["learning-hub"].node }, // Bottom-left (Learning Hub anchor)
+  { cx: 620, cy: 580, color: sectionColors.careers.node }, // Bottom-right (Careers anchor)
+];
+
 export default function OrbitSystem() {
   return (
     <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
@@ -13,15 +26,15 @@ export default function OrbitSystem() {
         <defs>
           {/* Subtle cyan & teal stroke gradients */}
           <linearGradient id="orbitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00F2FE" stopOpacity="0.6" />
-            <stop offset="50%" stopColor="#185FA5" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#0F6E56" stopOpacity="0.5" />
+            <stop offset="0%" stopColor={brandColors.cyan} stopOpacity="0.6" />
+            <stop offset="50%" stopColor={brandColors.blue} stopOpacity="0.2" />
+            <stop offset="100%" stopColor={brandColors.teal} stopOpacity="0.5" />
           </linearGradient>
 
           <linearGradient id="orbitGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#38EF7D" stopOpacity="0.5" />
-            <stop offset="60%" stopColor="#00F2FE" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#0D3B6E" stopOpacity="0.1" />
+            <stop offset="0%" stopColor={brandColors.green} stopOpacity="0.5" />
+            <stop offset="60%" stopColor={brandColors.cyan} stopOpacity="0.3" />
+            <stop offset="100%" stopColor={brandColors.navy} stopOpacity="0.1" />
           </linearGradient>
 
           {/* Glowing node glow filter */}
@@ -61,31 +74,20 @@ export default function OrbitSystem() {
           rx="380"
           ry="190"
           transform="rotate(-5 400 400)"
-          stroke="rgba(0, 242, 254, 0.15)"
+          stroke={glow(0.15)}
           strokeWidth="1"
         />
 
         {/* Static Orbit Node Points (Intersection markers) */}
         <g filter="url(#glow)">
-          {/* Top-left node (Universities anchor) */}
-          <circle cx="210" cy="240" r="4" fill="#00F2FE" />
-          <circle cx="210" cy="240" r="8" fill="#00F2FE" fillOpacity="0.25" />
-
-          {/* Top-right node (Programmes anchor) */}
-          <circle cx="590" cy="220" r="4" fill="#A855F7" />
-          <circle cx="590" cy="220" r="8" fill="#A855F7" fillOpacity="0.25" />
-
-          {/* Right node (Subjects anchor) */}
-          <circle cx="680" cy="420" r="4" fill="#3B82F6" />
-          <circle cx="680" cy="420" r="8" fill="#3B82F6" fillOpacity="0.25" />
-
-          {/* Bottom-left node (Resources anchor) */}
-          <circle cx="280" cy="560" r="4" fill="#EAB308" />
-          <circle cx="280" cy="560" r="8" fill="#EAB308" fillOpacity="0.25" />
-
-          {/* Bottom-right node (Careers anchor) */}
-          <circle cx="620" cy="580" r="4" fill="#10B981" />
-          <circle cx="620" cy="580" r="8" fill="#10B981" fillOpacity="0.25" />
+          {nodes.map(({ cx, cy, color }) =>
+            color ? (
+              <Fragment key={`${cx}-${cy}`}>
+                <circle cx={cx} cy={cy} r="4" fill={color} />
+                <circle cx={cx} cy={cy} r="8" fill={color} fillOpacity="0.25" />
+              </Fragment>
+            ) : null,
+          )}
         </g>
       </svg>
     </div>
