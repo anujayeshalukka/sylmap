@@ -48,11 +48,21 @@
   }
 }
 
+/*
+ * No-JS fallback only: starts after the normal exit (intro + fade) plus a margin. The delay is computed in
+ * preloaderSession.ts (PRELOADER_CSS_VARS) and set inline on the overlay, so no timing is duplicated here.
+ */
 .sylmap-preloader {
-  animation: sylmap-preloader-autohide 400ms ease 3.2s forwards;
+  animation: sylmap-preloader-autohide 400ms ease var(--preloader-autohide-delay) forwards;
 }
 
-/* Intro entrance animations: pure CSS so they start at first paint, before hydration. */
+/*
+ * Intro entrance animations: pure CSS so they start at first paint, before hydration.
+ * Durations/delays below are the originally authored 2s choreography (PRELOADER_BASE_INTRO_MS), multiplied
+ * by --intro-pace so everything lands proportionally within the current intro length. --intro-pace and
+ * --intro-ms come from PRELOADER_CSS_VARS (preloaderSession.ts), set inline on the overlay; the var()
+ * fallbacks are just the unstretched 2s originals, not copies of the current timing.
+ */
 @keyframes sylmap-intro-globe {
   from { opacity: 0; transform: scale(0.82); }
   to { opacity: 1; transform: scale(1); }
@@ -82,14 +92,14 @@
   to { width: 100%; }
 }
 
-.sylmap-intro-globe { animation: sylmap-intro-globe 900ms var(--ease-emphasized) both; }
-.sylmap-intro-orbits { animation: sylmap-intro-orbits 1100ms var(--ease-emphasized) 200ms both; }
-.sylmap-intro-fade-down { animation: sylmap-intro-fade-down 600ms var(--ease-emphasized) both; }
-.sylmap-intro-rise { animation: sylmap-intro-rise 500ms var(--ease-emphasized) both; }
-.sylmap-intro-from-left { animation: sylmap-intro-from-left 500ms var(--ease-emphasized) both; }
-.sylmap-intro-from-right { animation: sylmap-intro-from-right 500ms var(--ease-emphasized) both; }
-/* Duration must match PRELOADER_INTRO_MS; the controller exits when this animation ends. */
-.sylmap-intro-progress { animation: sylmap-intro-progress 2000ms linear both; }
+.sylmap-intro-globe { animation: sylmap-intro-globe calc(900ms * var(--intro-pace, 1)) var(--ease-emphasized) both; }
+.sylmap-intro-orbits { animation: sylmap-intro-orbits calc(1100ms * var(--intro-pace, 1)) var(--ease-emphasized) calc(200ms * var(--intro-pace, 1)) both; }
+.sylmap-intro-fade-down { animation: sylmap-intro-fade-down calc(600ms * var(--intro-pace, 1)) var(--ease-emphasized) both; }
+.sylmap-intro-rise { animation: sylmap-intro-rise calc(500ms * var(--intro-pace, 1)) var(--ease-emphasized) both; }
+.sylmap-intro-from-left { animation: sylmap-intro-from-left calc(500ms * var(--intro-pace, 1)) var(--ease-emphasized) both; }
+.sylmap-intro-from-right { animation: sylmap-intro-from-right calc(500ms * var(--intro-pace, 1)) var(--ease-emphasized) both; }
+/* Runs for exactly PRELOADER_INTRO_MS; the controller exits when this animation ends. */
+.sylmap-intro-progress { animation: sylmap-intro-progress var(--intro-ms, 2000ms) linear both; }
 
 @media (prefers-reduced-motion: reduce) {
   .sylmap-preloader {

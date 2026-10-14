@@ -9,6 +9,7 @@ import type { SectionId } from "@/config/sections";
 import { typography } from "@/styles/tokens";
 import { cn } from "@/lib/cn";
 import AnimatedOrbitSystem from "./AnimatedOrbitSystem";
+import { PRELOADER_PACE } from "./preloaderSession";
 
 /**
  * Label anchors around the globe (sm and up). Left-side labels sit outside the left edge,
@@ -26,10 +27,11 @@ const labelPlacement: Record<SectionId, { side: "left" | "right"; className: str
 /** Order the labels light up in (clockwise from upper-left) */
 const revealOrder: SectionId[] = ["universities", "programmes", "subjects", "careers", "learning-hub", "compare"];
 
-const delay = (ms: number): CSSProperties => ({ animationDelay: `${ms}ms` });
+/** Entrance delay authored for the original 2s intro, stretched by PRELOADER_PACE to match the current length. */
+const delay = (ms: number): CSSProperties => ({ animationDelay: `${Math.round(ms * PRELOADER_PACE)}ms` });
 
 export interface AcademicUniverseSceneProps {
-  /** Ref to the progress bar; its CSS animation (2s) defines the intro length */
+  /** Ref to the progress bar; its CSS animation (PRELOADER_INTRO_MS, 2.7s) defines the intro length */
   progressRef?: Ref<HTMLDivElement>;
 }
 

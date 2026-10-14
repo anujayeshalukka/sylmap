@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import AcademicUniverseScene from "./AcademicUniverseScene";
-import { PRELOADER_COOKIE, PRELOADER_FADE_MS, PRELOADER_INTRO_MS } from "./preloaderSession";
+import { PRELOADER_COOKIE, PRELOADER_CSS_VARS, PRELOADER_FADE_MS, PRELOADER_INTRO_MS } from "./preloaderSession";
 
 type Phase = "intro" | "exit" | "done";
 
@@ -20,7 +20,8 @@ export interface AcademicUniversePreloaderProps {
 /**
  * Full-screen "Academic Universe" intro for the experimental homepage.
  *
- * - Plays ~2s once per browser session (session cookie), then fades into the page underneath.
+ * - Plays 2.7s (PRELOADER_INTRO_MS) once per browser session (session cookie), then fades out over
+ *   0.5s into the page underneath (~3.2s in total).
  * - The intro length is the progress bar's CSS animation, which starts at first paint; the overlay
  *   exits when it finishes, so slow hydration never stretches the intro.
  * - Never waits on network or search; the homepage is already rendered beneath it.
@@ -77,8 +78,9 @@ export default function AcademicUniversePreloader({ initiallyVisible }: Academic
     <div
       role="status"
       aria-label="Loading Sylmap"
+      style={{ ...PRELOADER_CSS_VARS, transitionDuration: `${PRELOADER_FADE_MS}ms` } as CSSProperties}
       className={cn(
-        "sylmap-preloader fixed inset-0 z-[60] flex flex-col items-center justify-center overflow-hidden bg-canvas select-none transition-opacity duration-500 ease-standard",
+        "sylmap-preloader fixed inset-0 z-[60] flex flex-col items-center justify-center overflow-hidden bg-canvas select-none transition-opacity ease-standard",
         phase === "exit" && "opacity-0 pointer-events-none",
       )}
     >

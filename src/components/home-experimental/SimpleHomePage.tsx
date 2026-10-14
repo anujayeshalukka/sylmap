@@ -3,6 +3,7 @@ import HeroSearch, { type SearchSuggestion } from "@/components/home/HeroSearch"
 import { Container } from "@/components/ui/Container";
 import { typography } from "@/styles/tokens";
 import { cn } from "@/lib/cn";
+import HomeSectionNav from "./HomeSectionNav";
 import HomeShell from "./HomeShell";
 import SimpleHeader from "./SimpleHeader";
 
@@ -15,7 +16,8 @@ const suggestions: SearchSuggestion[] = [
 
 /**
  * Experimental simplified homepage: logo + account header, headline, the one unified search and
- * suggested queries. Section destinations live in the left sidebar, which appears on scroll.
+ * suggested queries. Section destinations are in the compact bottom navigation until the first scroll,
+ * then in the left sidebar, which appears on scroll and stays.
  * The globe lives in the preloader. Reuses the original background and search (same intent routing).
  */
 export default function SimpleHomePage() {
@@ -40,6 +42,9 @@ export default function SimpleHomePage() {
               <HeroSearch suggestions={suggestions} centerSuggestions />
             </div>
           </section>
+
+          {/* Tablet/desktop: compact section navigation (fades out on the first scroll, when the sidebar appears) */}
+          <HomeSectionNav />
 
           {/* Mobile: keep content clear of the floating bottom navigation */}
           <div className="h-20 md:hidden" aria-hidden />

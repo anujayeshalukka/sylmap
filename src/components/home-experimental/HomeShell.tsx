@@ -9,6 +9,13 @@ interface SidebarState {
   isRevealed: boolean;
   /** Rail is labelled (240px) rather than icon-only (64px). Independent of visibility. */
   isExpanded: boolean;
+  /**
+   * The md-and-up bottom section bar (HomeSectionNav) is showing. True on a fresh page; becomes false at
+   * the first qualifying scroll (the same moment the sidebar is first revealed) and never returns during
+   * this page session, even if the sidebar is later hidden, so two navigation systems never compete.
+   * Below md there is no rail, so the root-layout MobileBottomNav dock is unaffected and always stays.
+   */
+  isBottomNavVisible: boolean;
   /** Mobile drawer is open (below md). Independent of the rail. */
   isMobileDrawerOpen: boolean;
   toggleExpanded: () => void;
@@ -42,6 +49,9 @@ const REARM_BELOW = 60;
  *   next time the user scrolls down from near the top (past REVEAL_AT after being above REARM_BELOW).
  *   Nothing persists across page loads.
  *
+ * Bottom section bar (md and up): shown on the fresh page, hidden for good at the first reveal (see above).
+ * The mobile dock is not touched.
+ *
  * Expansion (independent of visibility): lg and up pushes content (64px → 240px) so the rail never
  * covers the search; md overlays content with a scrim. Below md there is no rail; the mobile drawer
  * opens from the header.
@@ -49,6 +59,7 @@ const REARM_BELOW = 60;
 export default function HomeShell({ children }: { children: ReactNode }) {
   const [isRevealed, setIsRevealed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isBottomNavVisible, setIsBottomNavVisible] = useState(true);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   /** Whether a qualifying scroll may reveal the rail (false right after an explicit hide made while scrolled down). */
   const armedRef = useRef(true);
@@ -62,7 +73,10 @@ export default function HomeShell({ children }: { children: ReactNode }) {
         if (y < REARM_BELOW) armedRef.current = true;
         return;
       }
-      if (y > REVEAL_AT) setIsRevealed(true);
+      if (y > REVEAL_AT) {
+        setIsRevealed(true);
+        setIsBottomNavVisible(false);
+      }
     };
     const frame = requestAnimationFrame(onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -89,6 +103,7 @@ export default function HomeShell({ children }: { children: ReactNode }) {
     () => ({
       isRevealed,
       isExpanded,
+      isBottomNavVisible,
       isMobileDrawerOpen,
       toggleExpanded,
       collapse,
@@ -96,7 +111,17 @@ export default function HomeShell({ children }: { children: ReactNode }) {
       openMobileDrawer,
       closeMobileDrawer,
     }),
-    [isRevealed, isExpanded, isMobileDrawerOpen, toggleExpanded, collapse, hideSidebar, openMobileDrawer, closeMobileDrawer],
+    [
+      isRevealed,
+      isExpanded,
+      isBottomNavVisible,
+      isMobileDrawerOpen,
+      toggleExpanded,
+      collapse,
+      hideSidebar,
+      openMobileDrawer,
+      closeMobileDrawer,
+    ],
   );
 
   return (
