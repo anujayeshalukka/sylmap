@@ -47,17 +47,25 @@
     visibility: hidden;
   }
 }
+/* Same fade under a second name: switching animation-name restarts the safety net from the intro start. */
+@keyframes sylmap-preloader-autohide-after-start {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 
 /*
- * No-JS fallback only: starts after the normal exit (intro + fade) plus a margin. The delay is computed in
- * preloaderSession.ts (PRELOADER_CSS_VARS) and set inline on the overlay, so no timing is duplicated here.
+ * No-JS safety net: starts after the normal exit (intro + fade) plus a margin. With JavaScript the delay is
+ * replaced below. Delays are computed in preloaderSession.ts (PRELOADER_CSS_VARS) and set inline on the
+ * overlay, so no timing is duplicated here.
  */
 .sylmap-preloader {
   animation: sylmap-preloader-autohide 400ms ease var(--preloader-autohide-delay) forwards;
 }
 
 /*
- * Intro entrance animations: pure CSS so they start at first paint, before hydration.
+ * Intro entrance animations (CSS; with JavaScript they are held until the overlay is ready, see below).
  * Durations/delays below are the originally authored 2s choreography (PRELOADER_BASE_INTRO_MS), multiplied
  * by --intro-pace so everything lands proportionally within the current intro length. --intro-pace and
  * --intro-ms come from PRELOADER_CSS_VARS (preloaderSession.ts), set inline on the overlay; the var()
@@ -100,6 +108,37 @@
 .sylmap-intro-from-right { animation: sylmap-intro-from-right calc(500ms * var(--intro-pace, 1)) var(--ease-emphasized) both; }
 /* Runs for exactly PRELOADER_INTRO_MS; the controller exits when this animation ends. */
 .sylmap-intro-progress { animation: sylmap-intro-progress var(--intro-ms, 2000ms) linear both; }
+
+/*
+ * With JavaScript, the entrance does not start on its own: it is held at its first frame until the
+ * start signal body[data-sylmap-intro="running"] is set (PRELOADER_RUNNING_ATTR; by the inline start
+ * script or AcademicUniversePreloader) once the overlay is painted and its images are ready, so the full
+ * intro is always seen. While waiting, the safety net uses the longer --preloader-safety-delay. Once the
+ * intro starts, the safety net restarts from that moment with the normal --preloader-autohide-delay, so it
+ * can never cut a playing intro short yet still clears the overlay if the React bundle is late or fails.
+ * Without JavaScript, or in browsers without the scripting media feature, none of this applies and the
+ * entrance plays from first paint as before.
+ */
+@media (scripting: enabled) {
+  .sylmap-preloader {
+    animation-delay: var(--preloader-safety-delay);
+  }
+  body[data-sylmap-intro="running"] .sylmap-preloader {
+    animation: sylmap-preloader-autohide-after-start 400ms ease var(--preloader-autohide-delay) forwards;
+  }
+  body:not([data-sylmap-intro="running"]) .sylmap-preloader
+    :is(
+      .sylmap-intro-globe,
+      .sylmap-intro-orbits,
+      .sylmap-intro-fade-down,
+      .sylmap-intro-rise,
+      .sylmap-intro-from-left,
+      .sylmap-intro-from-right,
+      .sylmap-intro-progress
+    ) {
+    animation-play-state: paused;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .sylmap-preloader {

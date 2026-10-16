@@ -23,7 +23,7 @@ const suggestions: SearchSuggestion[] = [
 export default function SimpleHomePage() {
   return (
     <main className="home-shell bg-canvas text-fg-default relative min-h-screen flex flex-col">
-      <UniverseBackground />
+      <UniverseBackground video="after-load" />
 
       <HomeShell>
         <Container className="relative z-20 flex flex-col min-h-screen pb-2 sm:pb-3 lg:pb-4">

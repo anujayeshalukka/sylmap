@@ -38,13 +38,14 @@ export interface AcademicUniverseSceneProps {
 /**
  * The Academic Universe visual: cosmic background, logo, centred globe entrance, animated
  * orbits with section satellites, category labels and the brand line with a progress bar.
- * All entrance motion is CSS (globals.css, "sylmap-intro-*"), so it starts at first paint
- * without waiting for JavaScript. Timing and session behaviour live in AcademicUniversePreloader.
+ * All entrance motion is CSS (globals.css, "sylmap-intro-*"); AcademicUniversePreloader starts it once
+ * the overlay is painted and ready, and owns timing and session behaviour. The background shows the
+ * video's poster only, so the overlay does not download a second copy of the video.
  */
 export default function AcademicUniverseScene({ progressRef }: AcademicUniverseSceneProps) {
   return (
     <>
-      <UniverseBackground />
+      <UniverseBackground video="poster" />
 
       {/* Logo */}
       <div className="absolute top-6 sm:top-8 left-1/2 -translate-x-1/2 z-20 sylmap-intro-fade-down">
