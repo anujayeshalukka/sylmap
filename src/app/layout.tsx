@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import MobileBottomNav from "@/components/navigation/MobileBottomNav";
 
-const inter = Inter({
+/**
+ * Sylmap's single typeface. No `weight` option: next/font then serves the variable font, one file covering
+ * every weight in use (400–800). Wired to Tailwind's font-sans in src/styles/tokens.css (--font-sans), which
+ * also lists the system fallbacks for Malayalam and other Indian scripts the font does not cover.
+ */
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
@@ -50,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} font-sans antialiased h-full text-slate-100 bg-slate-950`}>
+    <html lang="en" className={`${jakarta.variable} font-sans antialiased h-full text-slate-100 bg-slate-950`}>
       <body
         suppressHydrationWarning
         className="h-full w-full bg-slate-950 text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200"

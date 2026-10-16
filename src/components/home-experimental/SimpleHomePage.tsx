@@ -19,10 +19,11 @@ const suggestions: SearchSuggestion[] = [
  * suggested queries. Section destinations are in the compact bottom navigation until the first scroll,
  * then in the left sidebar, which appears on scroll and stays.
  * The globe lives in the preloader. Reuses the original background and search (same intent routing).
+ * sylmap-readable (src/styles/tokens.css) gives this page the larger, higher-contrast type scale.
  */
 export default function SimpleHomePage() {
   return (
-    <main className="home-shell bg-canvas text-fg-default relative min-h-screen flex flex-col">
+    <main className="sylmap-readable home-shell bg-canvas text-fg-default relative min-h-screen flex flex-col">
       <UniverseBackground video="after-load" />
 
       <HomeShell>

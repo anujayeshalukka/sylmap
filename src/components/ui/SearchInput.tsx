@@ -3,6 +3,7 @@
 import type { FormEvent, Ref } from "react";
 import { ArrowRight, Search } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { typography } from "@/styles/tokens";
 import { IconButton } from "./IconButton";
 
 export interface SearchInputProps {
@@ -41,7 +42,10 @@ export function SearchInput({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="w-full py-1 pl-0 pr-14 bg-transparent text-sm sm:text-base text-fg placeholder-slate-400 outline-none font-medium"
+          className={cn(
+            "w-full py-1 pl-0 pr-14 bg-transparent text-fg placeholder-slate-400 outline-none",
+            typography.searchInput,
+          )}
         />
 
         <IconButton

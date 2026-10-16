@@ -5,7 +5,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ["micro", "2xs"],
+      text: ["micro", "2xs", "panel-title", "panel-title-sm", "panel-title-lg", "search", "search-sm", "search-lg"],
       radius: ["panel", "card", "control", "tag", "dock"],
       shadow: [
         "panel",

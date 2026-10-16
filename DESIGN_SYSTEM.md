@@ -53,7 +53,19 @@ Gradients: the headline word uses `#4CA3FF → #00F2FE → #38EF7D`. Primary act
 
 ## 3. Typography
 
-Font: the `font-sans` system stack, which is what the homepage actually renders. Inter is loaded in `layout.tsx` but not wired up; V1 keeps that unchanged. Weights: 400 / 500 / 600 / 700. Recipes are in `typography`. Pair each with a colour token.
+### Typeface
+
+**Plus Jakarta Sans** is Sylmap's single typeface: headings, body, search, buttons, navigation, cards, tables and AI answers.
+
+- **Loading:** `next/font/google` in `src/app/layout.tsx` (`--font-jakarta`), Latin subset, `display: swap`. No `weight` option, so it is served as the variable font: one self-hosted file (~27 KB) covers every weight. next/font also adds a metric-matched fallback face to limit layout shift while it loads.
+- **Wiring:** `--font-sans` in `src/styles/tokens.css`, so Tailwind's `font-sans` (set on `<html>`) uses it everywhere. Do not add other font imports.
+- **Weights in use:** 400 regular · 500 medium · 600 semibold · 700 bold · 800 extrabold (only the `/coming-soon` headline). Build hierarchy with weight and colour before size; do not make everything bold.
+- **Regional scripts:** the font is Latin-only. Text in Malayalam, Kannada, Tamil, Telugu or Devanagari falls back glyph by glyph to the platform's own font for that script, listed in `--font-sans`: Nirmala UI (Windows), … Sangam MN / Kohinoor Devanagari (Apple), Noto Sans … (Android, Linux). Nothing extra is downloaded. Mark regional text with its `lang` attribute (e.g. `lang="ml"`).
+- **Exception:** course codes and scheme tags (`code` recipe, `font-mono`) deliberately stay in the system monospace stack.
+
+### Base scale
+
+Recipes are in `typography`. Pair each with a colour token. These sizes apply on every route by default.
 
 | Token | Classes |
 | --- | --- |
@@ -71,6 +83,33 @@ Font: the `font-sans` system stack, which is what the homepage actually renders.
 | `nav` / `navDrawer` | 14px medium / 18px semibold |
 | `button`, `badge` / `badgeSm` | 12px semibold / 11px semibold |
 | `code` | mono 10px semibold |
+
+### Readable scale (`.sylmap-readable`)
+
+The Academic Universe homepage (`/`) puts `.sylmap-readable` on its `<main>`. Defined in `src/styles/tokens.css`, it re-points Tailwind's size tokens (and two text-colour tokens) for everything inside, so the shared search panel, result cards, comparison tables and AI answers read larger there with no per-component overrides. Other routes (`/home-original`, `/coming-soon`) keep the base scale. Apply the class to a page root to opt a page in; do not use it on individual components.
+
+| Size token | Base | Readable | Line height | Typical use |
+| --- | --- | --- | --- | --- |
+| `text-micro` | 10px | 12px | 1.35 | Uppercase tags, table column labels, code tags |
+| `text-2xs` | 11px | 14px | 1.45 | Descriptions, helper text, section-nav labels |
+| `text-xs` | 12px | 14px | 1.5 | Card body, suggestions, buttons, table cells, item titles |
+| `text-sm` | 14px | 16px | 1.5 | Body baseline, panel/card titles, sidebar labels |
+| `text-base` | 16px | 18px | 1.5 | Card titles at sm+ |
+| `text-lg` | 18px | 20px | 1.45 | Large card titles |
+| `text-xl`+ | — | unchanged | — | Hero and section headings (hero 30 → 48 → 60px, bold) |
+
+Two search-panel roles have their own size tokens (`typography.panelTitle`, `typography.searchInput`) so they can opt out of the step-up and stay at the approved 16px. On the base scale they equal the sizes they replaced, so other routes are unchanged:
+
+| Role token | Base (mobile / sm / lg) | Readable (mobile / sm / lg) | Used for |
+| --- | --- | --- | --- |
+| `text-panel-title` (`-sm`, `-lg`) | 14 / 16 / 16px | 16 / 16 / 16px, bold | "Search & Explore" |
+| `text-search` (`-sm`, `-lg`) | 14 / 16 / 16px | 16 / 16 / 16px, medium | Search input text and placeholder |
+
+On readable pages the search input's line heights (1.5 / 1.6875 / 1.6875) keep its line box at 24 / 27 / 27px, so the field keeps its height. New custom `text-*` size names must also be added to `cn()`'s tailwind-merge config (`src/lib/cn.ts`), otherwise they are mistaken for colours and dropped next to classes like `text-fg`.
+
+`text-xs` is 14px, not 15px: at 15px the approved one-row suggestion chips wrap on desktop. The search input stays 16px on mobile, so iOS does not zoom the field, and long placeholders end in "…".
+
+Contrast inside `.sylmap-readable`: `fg-faint` (slate-500, 3.6–4.2:1, below WCAG AA on Sylmap's navy backgrounds) becomes slate-400 (6.6–7.9:1), and `fg-muted` moves halfway to slate-300 (~9:1), so muted text at reduced opacity stays above AA. `fg-body` and `fg-secondary` already pass (11–16:1) and keep their hierarchy.
 
 ## 4. Spacing
 
@@ -209,7 +248,9 @@ Navigation (`primaryNav`) carries the label, href, icon, colour, card descriptio
 
 ## 14. Do not
 
-- Introduce new colours, fonts, a light theme, or a second accent hue for UI chrome.
+- Introduce new colours, a light theme, or a second accent hue for UI chrome.
+- Add a second typeface or per-component font overrides: Plus Jakarta Sans only (monospace for codes is the one exception).
+- Shrink text below the readable scale on `.sylmap-readable` pages, or add one-off font sizes instead of using the size tokens.
 - Add a separate "Ask Sylmap" search box, tab or mode.
 - Make every card glow, or add glow to body text.
 - Use radii outside the six above.

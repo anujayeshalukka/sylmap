@@ -53,7 +53,10 @@ export default function HomeSectionNav() {
                 >
                   <Icon className="w-4 h-4 stroke-[2]" aria-hidden />
                 </span>
-                <span className="text-2xs font-semibold leading-none truncate max-w-full">{item.label}</span>
+                {/* 14px on tablet; 12px from lg (desktop), with a 14px line box so the bar keeps its height */}
+                <span className="text-2xs lg:text-micro font-semibold leading-none lg:leading-3.5 truncate max-w-full">
+                  {item.label}
+                </span>
               </Link>
             );
           })}

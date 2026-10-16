@@ -54,8 +54,38 @@
   --color-danger-text: var(--color-red-300);
 
   /* ---------- Typography ---------- */
+  /*
+   * One typeface: Plus Jakarta Sans (loaded in app/layout.tsx as --font-jakarta, Latin only). Text in Indian
+   * scripts falls through, glyph by glyph, to the platform's own font for that script, so nothing extra is
+   * downloaded: Windows (Nirmala UI), Apple (… Sangam MN, Kohinoor Devanagari), Android/Linux (Noto Sans …).
+   * font-mono (course codes, scheme tags) deliberately stays the system monospace stack.
+   */
+  --font-sans:
+    var(--font-jakarta), "Nirmala UI", "Malayalam Sangam MN", "Noto Sans Malayalam", "Kannada Sangam MN",
+    "Noto Sans Kannada", "Tamil Sangam MN", "Noto Sans Tamil", "Telugu Sangam MN", "Noto Sans Telugu",
+    "Kohinoor Devanagari", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
   --text-micro: 0.625rem; /* 10px */
   --text-2xs: 0.6875rem; /* 11px */
+
+  /*
+   * Role sizes for the two search-panel texts, used at three breakpoints (base / sm: / lg:). By default they
+   * equal the steps they replaced (text-sm → text-base), so routes on the base scale render exactly as before.
+   * They exist so these two can opt out of the readable scale's step-up: .sylmap-readable holds them at 16px.
+   */
+  --text-panel-title: 0.875rem; /* 14px */
+  --text-panel-title--line-height: calc(1.25 / 0.875);
+  --text-panel-title-sm: 1rem; /* 16px */
+  --text-panel-title-sm--line-height: 1.5;
+  --text-panel-title-lg: 1rem; /* 16px */
+  --text-panel-title-lg--line-height: 1.5;
+  --text-search: 0.875rem; /* 14px */
+  --text-search--line-height: calc(1.25 / 0.875);
+  --text-search-sm: 1rem; /* 16px */
+  --text-search-sm--line-height: 1.5;
+  --text-search-lg: 1rem; /* 16px */
+  --text-search-lg--line-height: 1.5;
 
   /* ---------- Layout ---------- */
   --container-shell: 1920px;
@@ -114,6 +144,59 @@
       transform: translateY(-4px);
     }
   }
+}
+
+/*
+ * Readable type scale (Academic Universe homepage). Applied with the .sylmap-readable class on a page root, it
+ * re-points Tailwind's size and text-colour tokens for everything inside, so shared components (search panel,
+ * result cards, comparison table, AI answers) read larger there without component-specific overrides, while
+ * other routes keep the base scale above. Sizes step up one notch; display sizes (text-xl and up: hero and
+ * section headings) are unchanged. Line heights move to ~1.5 for body text.
+ *
+ *   token      base   readable   typical use
+ *   micro      10px   12px       uppercase tags, table column labels, code tags
+ *   2xs        11px   14px       descriptions, helper text, section-nav labels
+ *   xs         12px   14px       card body, suggestions, buttons, table cells, item titles
+ *                               (14px, not 15: keeps the approved one-row suggestions on desktop)
+ *   sm         14px   16px       body baseline, panel and card titles, sidebar labels
+ *   base       16px   18px       card titles at sm and up
+ *   lg         18px   20px       large card titles
+ *
+ * Contrast: fg-faint (slate-500) is below WCAG AA on every Sylmap background (3.6–4.2:1), so it moves to
+ * slate-400 (6.6–7.9:1); fg-muted moves halfway to slate-300 (~9:1) so opacity-modified muted text stays
+ * well above AA. fg-body and fg-secondary already pass comfortably and keep their hierarchy.
+ */
+.sylmap-readable {
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.35;
+  --text-2xs: 0.875rem;
+  --text-2xs--line-height: 1.45;
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.5;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.45;
+
+  /* Search panel roles stay at the approved 16px on every width ("Search & Explore" bold, input and placeholder
+     medium) instead of stepping up with the scale. Only the mobile size needs setting (base mobile is 14px); sm/lg
+     inherit the base 16px. The input's sm/lg line height keeps its line box at 27px, so the field keeps its height. */
+  --text-panel-title: 1rem;
+  --text-panel-title--line-height: 1.5;
+  --text-search: 1rem;
+  --text-search--line-height: 1.5;
+  --text-search-sm--line-height: 1.6875;
+  --text-search-lg--line-height: 1.6875;
+
+  --color-fg-muted: color-mix(in oklab, var(--color-slate-300) 50%, var(--color-slate-400));
+  --color-fg-faint: var(--color-slate-400);
+}
+
+/* At 16px (kept on mobile so iOS does not zoom the field) long placeholders end in "…" rather than mid-word. */
+.sylmap-readable input {
+  text-overflow: ellipsis;
 }
 
 /* Plain CSS custom properties for values Tailwind has no theme namespace for. */

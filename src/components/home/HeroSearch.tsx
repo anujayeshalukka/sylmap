@@ -120,7 +120,7 @@ export default function HeroSearch({ suggestions = popularSearches, centerSugges
         {/* Panel Header */}
         <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-2.5">
           <div className="flex items-center flex-wrap gap-2 sm:gap-2.5">
-            <h3 className={cn(typography.h3, "text-fg")}>Search &amp; Explore</h3>
+            <h3 className={cn(typography.panelTitle, "text-fg")}>Search &amp; Explore</h3>
 
             <Divider strong />
 
