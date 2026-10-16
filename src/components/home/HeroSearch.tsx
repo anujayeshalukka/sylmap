@@ -152,7 +152,10 @@ export default function HeroSearch({ suggestions = popularSearches, centerSugges
 
       {/* Popular Prompt Suggestions Chips (When No Active Result) */}
       {!queryResult && !isLoading && (
-        <div className={cn("flex items-center gap-2 flex-wrap pt-0.5 px-1", centerSuggestions && "justify-center")}>
+        <div
+          data-suggestions
+          className={cn("flex items-center gap-2 flex-wrap pt-0.5 px-1", centerSuggestions && "justify-center")}
+        >
           <span className="text-xs text-fg-secondary font-semibold mr-1">Try searching or asking:</span>
           {suggestions.map((chip) => (
             <Chip key={chip.label} onClick={() => handleTagClick(chip.query)}>

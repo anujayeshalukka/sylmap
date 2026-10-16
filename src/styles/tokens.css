@@ -194,6 +194,18 @@
   --color-fg-faint: var(--color-slate-400);
 }
 
+/*
+ * Suggested-search row (HeroSearch, [data-suggestions]) on desktop (lg, 1024px+): "Try searching or asking:" and
+ * the suggestion chips drop from 14px to 12px. The 1.75 line height keeps the 21px line box, so chip heights,
+ * padding and the row's layout are unchanged. Tablet and mobile keep the readable 14px.
+ */
+@media (width >= 64rem) {
+  .sylmap-readable [data-suggestions] {
+    --text-xs: 0.75rem;
+    --text-xs--line-height: 1.75;
+  }
+}
+
 /* At 16px (kept on mobile so iOS does not zoom the field) long placeholders end in "…" rather than mid-word. */
 .sylmap-readable input {
   text-overflow: ellipsis;

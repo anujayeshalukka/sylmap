@@ -109,6 +109,10 @@ On readable pages the search input's line heights (1.5 / 1.6875 / 1.6875) keep i
 
 `text-xs` is 14px, not 15px: at 15px the approved one-row suggestion chips wrap on desktop. The search input stays 16px on mobile, so iOS does not zoom the field, and long placeholders end in "…".
 
+Bottom section navigation labels (Universities, Programmes, Compare, Subjects, Learning Hub, Careers): **12px on desktop (1024px and up), 14px on tablet, 10px on mobile**. Desktop and tablet use the bottom section bar (`HomeSectionNav`, md and up): its labels are `text-2xs` (14px on readable pages) with `lg:text-micro` (12px) and `lg:leading-3.5`, which keeps the 14px line box so the bar's height is unchanged. Mobile uses the separate floating dock (`MobileBottomNav`, below md, shared by all routes), whose labels stay `text-micro` at 10px.
+
+Suggested-search row ("Try searching or asking:" and its suggestion chips, `[data-suggestions]` in `HeroSearch`): **12px on desktop (1024px and up), 14px on tablet and mobile**. On readable pages, a desktop-only rule in `src/styles/tokens.css` re-points `text-xs` to 12px inside that row, with a 1.75 line height that keeps the 21px line box, so chip height, padding, radius, gaps, colours, weights (label 600, chips 500) and the single desktop row are unchanged. Other uses of `text-xs` and other routes are not affected.
+
 Contrast inside `.sylmap-readable`: `fg-faint` (slate-500, 3.6–4.2:1, below WCAG AA on Sylmap's navy backgrounds) becomes slate-400 (6.6–7.9:1), and `fg-muted` moves halfway to slate-300 (~9:1), so muted text at reduced opacity stays above AA. `fg-body` and `fg-secondary` already pass (11–16:1) and keep their hierarchy.
 
 ## 4. Spacing
